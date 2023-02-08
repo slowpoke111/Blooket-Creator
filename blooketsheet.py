@@ -1,14 +1,15 @@
+#Imports
 import gspread
 import random
 
 sa=gspread.service_account(filename="service_account.json")#Change filename to json file for service account
 sh=sa.open("Blooket Spreadsheet Import Template Testing")#Change to name of google sheet to edit(the google sheet must be shared with the service account)
 
-wks=sh.worksheet("Sheet1")
+wks=sh.worksheet("Sheet1")#Sets the sheet to edit
 
-with open("questions.txt",encoding="UTF-8") as f:
+with open("questions.txt",encoding="UTF-8") as f:#Read in questions.txt
     text=f.readlines()
-    lines=[i.strip() for i in text]
+    lines=[i.strip() for i in text]#Create a list of questions and answers and remove newline characters
 
 #Do not edit lines 14-19
 questionsCount=0#Counts the number of questions
