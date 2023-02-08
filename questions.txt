@@ -1,0 +1,6 @@
+What is 1+1?
+2
+What is 12*12?
+144
+True or False, 3 is prime?
+True
