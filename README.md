@@ -30,5 +30,5 @@ Steps to use:
 
 Todo
 - [x] Blooket Creator Framework
-- [] Customtk interface
+- [] Custom tkinkter interface
 - [] True False support (adding True when the answer is False instead of randomly picking)
