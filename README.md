@@ -29,6 +29,6 @@ Steps to use:
 
 
 Todo
-- [x] Blooket Creator Framework
-- []  Customtk interface
-- []  True False support (adding True when the answer is False instead of randomly picking)
+-[x]Blooket Creator Framework
+-[]Customtk interface
+-[]True False support (adding True when the answer is False instead of randomly picking)
