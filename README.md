@@ -26,3 +26,9 @@ Steps to use:
 13. Go to file and download as csv.
 14. Go back to Blooket .
 15. Click upload as csv (If you do not see the button, make sure you are editing the Blooket then click "Spreadsheet Import").
+
+
+Todo
+[x] Blooket Creator Framework
+[]  Customtk interface
+[]  True False support (adding True when the answer is False instead of randomly picking)
