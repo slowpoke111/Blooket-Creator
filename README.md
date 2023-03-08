@@ -7,6 +7,7 @@ Steps to use:
 3. Once editing the Blooket, select the green button labeled "Spreadsheet import"
 4. A box should pop up, select copy. You will be redirected and prompted to make a copy.
 5. After making a copy, share it with your Google service account.
+
   5a. To create a google service account:
     1. Go to the Google APIs Console (https://console.developers.google.com/).
     2. Create a new project.
