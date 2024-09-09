@@ -1,4 +1,7 @@
-# Blooket-Creator
+# Deprecated due to API update
+
+
+## Blooket-Creator
 Speed up Blooket creation by having a program automate most of the work.
 
 Steps to use:
