@@ -1,4 +1,4 @@
-# Deprecated due to API update
+# _**Deprecated**_ due to API update
 
 
 ## Blooket-Creator
