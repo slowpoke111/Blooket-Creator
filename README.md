@@ -1,5 +1,7 @@
 # _**Deprecated**_ due to API update
 
+> Any help to update to the new api would be welcome. Perhaps change to use the [gsheets](https://pypi.org/project/gsheets/) python package
+---
 
 ## Blooket-Creator
 Speed up Blooket creation by having a program automate most of the work.
