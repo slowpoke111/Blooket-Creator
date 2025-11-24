@@ -2,18 +2,19 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 from typing import List, Optional
-from AI_Client.AIClient import AIClient
+from .AIClient import AIClient
 
-class OpenAIAPI(AIClient):
+class HackclubAPI(AIClient):
     def __init__(self) -> None:
         load_dotenv('./.env')
-        api_key: Optional[str] = os.getenv('OPENAI_API_KEY')
+        api_key: Optional[str] = os.getenv('HACKCLUB_API_KEY')
         
         if not api_key:
-            raise ValueError("OPENAI_API_KEY not found in .env file")
+            raise ValueError("HACKCLUB_API_KEY not found in .env file")
         
         self.client: OpenAI = OpenAI(
-            api_key=api_key
+            api_key=api_key,
+            base_url="https://ai.hackclub.com/proxy/v1"
         )
     
     def generate_distractors(self, question: str, correct_answer: str) -> List[Optional[str]]:
@@ -34,12 +35,13 @@ Distractors:"""
 
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="qwen/qwen3-32b",
                 messages=[
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.7,
-                max_tokens=5000
+                max_tokens=5000,
+                extra_body={"reasoning_effort": "none"}  
             )
             
             content: Optional[str] = response.choices[0].message.content
@@ -69,7 +71,7 @@ Distractors:"""
 
 
 if __name__ == "__main__":
-    generator: OpenAIAPI = OpenAIAPI()
+    generator: HackclubAPI = HackclubAPI()
     
     question: str = "Who wrote The Master and Margarita?"
     answer: str = "Mikhail Bulgakov"

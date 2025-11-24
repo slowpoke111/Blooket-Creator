@@ -44,7 +44,7 @@ class Question:
 
 class BlooketWriter:
     
-    def __init__(self, template_path: str = "template.csv"):
+    def __init__(self, template_path: str = "./data/template.csv"):
 
         self.template_path = template_path
         self.questions: List[Question] = []

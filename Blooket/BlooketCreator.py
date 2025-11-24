@@ -1,5 +1,5 @@
-from BlooketWriter import BlooketWriter, Question
-from AI_Client.AIClient import AIClient
+from .BlooketWriter import BlooketWriter, Question
+from .AI_Client.AIClient import AIClient
 
 class BlooketCreator:
     def __init__(self, output_file: str, time_limit: int, api_client:AIClient) -> None:
