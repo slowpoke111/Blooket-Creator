@@ -1,4 +1,4 @@
-from .BlooketWriter import BlooketWriter, Question
+from .Writer.BlooketWriter import BlooketWriter, Question
 from .AI_Client.AIClient import AIClient
 
 class BlooketCreator:
@@ -10,6 +10,9 @@ class BlooketCreator:
         
     def add_question(self, question_text: str, correct_answer: str) -> None:
         distractors = self.api_client.generate_distractors(question_text, correct_answer)
+
+        if not distractors or all(not d for d in distractors):
+            print(f"Warning: no distractors generated for question: {question_text}")
         
         while len(distractors) < 3:
             distractors.append("")

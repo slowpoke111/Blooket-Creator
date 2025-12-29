@@ -1,50 +1,12 @@
 import csv
 import shutil
 from typing import List, Optional
+from .Writer import Writer
+from .Question import Question
 
-
-class Question:    
-    def __init__(
-        self,
-        question_text: str,
-        answer1: str,
-        answer2: str,
-        answer3: Optional[str] = None,
-        answer4: Optional[str] = None,
-        time_limit: int = 30,
-        correct_answers: Optional[List[int]] = None
-    ):
-        self.question_text = question_text
-        self.answer1 = answer1
-        self.answer2 = answer2
-        self.answer3 = answer3 or ""
-        self.answer4 = answer4 or ""
-        self.time_limit = min(time_limit, 300)  
-        self.correct_answers = correct_answers or [1]
+class BlooketWriter(Writer):
     
-    def to_row(self, question_number: int) -> List[str]:
-
-        correct_str = ",".join(str(ans) for ans in self.correct_answers)
-        
-        row = [
-            str(question_number),
-            self.question_text,
-            self.answer1,
-            self.answer2,
-            self.answer3,
-            self.answer4,
-            str(self.time_limit),
-            correct_str
-        ]
-        
-        row.extend([""] * (26 - len(row)))
-        
-        return row
-
-
-class BlooketWriter:
-    
-    def __init__(self, template_path: str = "./data/template.csv"):
+    def __init__(self, template_path: str = "Blooket\\Writer\\Templates\\Blooket.csv"):
 
         self.template_path = template_path
         self.questions: List[Question] = []
@@ -54,6 +16,24 @@ class BlooketWriter:
     
     def add_questions(self, questions: List[Question]) -> None:
         self.questions.extend(questions)
+    
+    def _question_to_row(self, question: Question, question_number: int) -> List[str]:
+        correct_str = ",".join(str(ans) for ans in question.correct_answers)
+        
+        row = [
+            str(question_number),
+            question.question_text,
+            question.answer1,
+            question.answer2,
+            question.answer3,
+            question.answer4,
+            str(question.time_limit),
+            correct_str
+        ]
+        
+        row.extend([""] * (26 - len(row)))
+        
+        return row
     
     def write(self, output_path: str) -> None:
         shutil.copy(self.template_path, output_path)
@@ -65,7 +45,7 @@ class BlooketWriter:
         for i, question in enumerate(self.questions):
             row_index = 2 + i  
             if row_index < len(rows):
-                rows[row_index] = question.to_row(i + 1)
+                rows[row_index] = self._question_to_row(question, i + 1)
         
         with open(output_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
@@ -104,10 +84,8 @@ if __name__ == "__main__":
         correct_answers=[1]
     )
     
-    # Create writer and add questions
     writer = BlooketWriter()
     writer.add_questions([q1, q2, q3])
     
-    # Write to output file
-    writer.write("output.csv")
+    writer.write("./data/output.csv")
     print("Questions written to output.csv")
