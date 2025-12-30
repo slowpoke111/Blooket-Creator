@@ -3,6 +3,7 @@ from typing import List
 from .Question import Question
 
 class Writer(ABC):
+    skipAI: bool = False
     @abstractmethod
     def add_question(self, question:Question):
         pass

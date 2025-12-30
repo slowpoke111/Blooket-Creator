@@ -1,14 +1,29 @@
-from .Writer.BlooketWriter import BlooketWriter, Question
+from .Writer.Question import Question
+from .Writer.Writer import Writer
 from .AI_Client.AIClient import AIClient
-
-class BlooketCreator:
-    def __init__(self, output_file: str, time_limit: int, api_client:AIClient) -> None:
+import time
+class SetCreator:
+    def __init__(self, output_file: str, time_limit: int, writer: Writer, api_client:AIClient) -> None:
         self.output_file = output_file
         self.time_limit = time_limit
         self.api_client = api_client
-        self.writer: BlooketWriter = BlooketWriter()
+        self.writer: Writer = writer
         
-    def add_question(self, question_text: str, correct_answer: str) -> None:
+    def add_question(self, question_text: str, correct_answer: str, skipAI: bool = False) -> None:
+        
+        if skipAI or self.writer.skipAI:
+            q: Question = Question(
+                question_text=question_text,
+                answer1=correct_answer,
+                answer2="",
+                answer3="",
+                answer4="",
+                time_limit=self.time_limit,
+                correct_answers=[1]
+            )
+            self.writer.add_question(q)
+            return
+        
         distractors = self.api_client.generate_distractors(question_text, correct_answer)
 
         if not distractors or all(not d for d in distractors):
@@ -28,6 +43,8 @@ class BlooketCreator:
         )
         
         self.writer.add_question(q)
+        
+        time.sleep(60 / self.api_client.get_rate_limit())  #Rate limit
     
     def write_to_file(self) -> None:
         self.writer.write(self.output_file)

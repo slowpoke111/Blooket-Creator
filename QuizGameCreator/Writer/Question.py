@@ -17,5 +17,6 @@ class Question:
         self.answer2 = answer2
         self.answer3 = answer3 or ""
         self.answer4 = answer4 or ""
+        self.answers = [self.answer1, self.answer2, self.answer3, self.answer4]
         self.time_limit = min(time_limit, maxTimeLimit)  
         self.correct_answers = correct_answers or [1]

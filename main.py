@@ -6,11 +6,11 @@ from tqdm import tqdm
 
 API = HackclubAPI()
 WRITER = BlooketWriter()
-CREATOR:SetCreator = SetCreator("./data/output.csv",30,WRITER,API)
+CREATOR:SetCreator = SetCreator(output_file="./data/output.csv", time_limit=30, writer=WRITER, api_client=API)
 
 questionTime: int = 30
 
-with open("./data/questions.txt", encoding="UTF-8") as f: #TODO: move to xml
+with open("./data/questions.txt", encoding="UTF-8") as f: #TODO: move to yaml
     text: list[str] = f.readlines()
     lines: list[str] = [i.strip() for i in text]
 
@@ -28,7 +28,6 @@ for line in tqdm(lines):
         answer = ""
         question = ""
     isAns = not isAns
-    time.sleep(1) # To avoid rate limiting, to be moved to API class later
 CREATOR.write_to_file()
 
 if isAns and question:

@@ -5,7 +5,7 @@ from .Writer import Writer
 from .Question import Question
 
 class BlooketWriter(Writer):
-    
+    skipAI = False
     def __init__(self, template_path: str = "Blooket\\Writer\\Templates\\Blooket.csv"):
 
         self.template_path = template_path

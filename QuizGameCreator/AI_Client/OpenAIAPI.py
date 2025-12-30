@@ -5,6 +5,7 @@ from typing import List, Optional
 from .AIClient import AIClient
 
 class OpenAIAPI(AIClient):
+    rateLimit:int = 60
     def __init__(self) -> None:
         load_dotenv('./.env')
         api_key: Optional[str] = os.getenv('OPENAI_API_KEY')

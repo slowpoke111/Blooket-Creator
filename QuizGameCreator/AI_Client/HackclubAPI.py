@@ -5,6 +5,7 @@ from typing import List, Optional
 from .AIClient import AIClient
 
 class HackclubAPI(AIClient):
+    rateLimit:int = 5
     def __init__(self) -> None:
         load_dotenv('./.env')
         api_key: Optional[str] = os.getenv('HACKCLUB_API_KEY')
