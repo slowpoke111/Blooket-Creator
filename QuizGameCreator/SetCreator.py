@@ -2,12 +2,14 @@ from .Writer.Question import Question
 from .Writer.Writer import Writer
 from .AI_Client.AIClient import AIClient
 import time
+from .Writer.QuestionBank import QuestionBank
 class SetCreator:
     def __init__(self, output_file: str, time_limit: int, writer: Writer, api_client:AIClient) -> None:
         self.output_file = output_file
         self.time_limit = time_limit
         self.api_client = api_client
         self.writer: Writer = writer
+        self.bank = QuestionBank()
         
     def add_question(self, question_text: str, correct_answer: str, skipAI: bool = False) -> None:
         
@@ -21,7 +23,7 @@ class SetCreator:
                 time_limit=self.time_limit,
                 correct_answers=[1]
             )
-            self.writer.add_question(q)
+            self.bank.add_question(q)
             return
         
         distractors = self.api_client.generate_distractors(question_text, correct_answer)
@@ -42,7 +44,7 @@ class SetCreator:
             correct_answers=[1]
         )
         
-        self.writer.add_question(q)
+        self.bank.add_question(q)
 
         if not skipAI and not self.writer.skipAI:
             rate_limit = self.api_client.get_rate_limit()
@@ -50,5 +52,11 @@ class SetCreator:
                 time.sleep(60 / rate_limit)
     
     def write_to_file(self) -> None:
+        self.writer.add_question_bank(self.bank)
         self.writer.write(self.output_file)
+        self.writer.clear()
+        
+    def clear_questions(self) -> None:
+        self.bank.clear()
+        self.writer.clear()
     

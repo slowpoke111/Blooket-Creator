@@ -55,9 +55,10 @@ class GimkitWriter(Writer):
             writer = csv.writer(f)
             writer.writerows(rows)
     
-    def clear(self) -> None:
+    def clear(self) -> bool:
         self.questions.clear()
-
+        return True
+    
 
 if __name__ == "__main__":
     q1 = Question(

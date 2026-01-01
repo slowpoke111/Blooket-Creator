@@ -1,19 +1,23 @@
 from abc import ABC, abstractmethod
 from typing import List
 from .Question import Question
-
+from .QuestionBank import QuestionBank
 class Writer(ABC):
     skipAI: bool = False
     @abstractmethod
-    def add_question(self, question:Question):
+    def add_question(self, question:Question) -> None:
         pass
 
     @abstractmethod
-    def add_questions(self, questions:List[Question]):
+    def add_questions(self, questions:List[Question]) -> None:
         pass
     
+    def add_question_bank(self, question_bank:QuestionBank) -> None:
+        for question in question_bank.get_all_questions():
+            self.add_question(question)
+    
     @abstractmethod
-    def write(self, output_path:str):
+    def write(self, output_path:str) -> None:
         pass
     
     @abstractmethod
@@ -21,5 +25,5 @@ class Writer(ABC):
         pass
     
     @abstractmethod
-    def clear(self):
+    def clear(self) -> bool:
         pass

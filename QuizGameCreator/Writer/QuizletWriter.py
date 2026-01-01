@@ -26,8 +26,9 @@ class QuizletWriter(Writer):
                 row = self._question_to_row(question)
                 writer.writerow(row)
     
-    def clear(self) -> None:
+    def clear(self) -> bool:
         self.questions.clear()
+        return True
 
 if __name__ == "__main__":
     q1 = Question(
