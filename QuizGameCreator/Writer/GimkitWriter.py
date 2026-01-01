@@ -4,10 +4,9 @@ from typing import List, Optional
 from .Writer import Writer
 from .Question import Question
 
-class BlooketWriter(Writer):
+class GimkitWriter(Writer):
     skipAI = False
-    def __init__(self, template_path: str = "QuizGameCreator/Writer/Templates/Blooket.csv"):
-
+    def __init__(self, template_path: str = "QuizGameCreator/Writer/Templates/Gimkit.csv"):
         self.template_path = template_path
         self.questions: List[Question] = []
     
@@ -18,20 +17,23 @@ class BlooketWriter(Writer):
         self.questions.extend(questions)
     
     def _question_to_row(self, question: Question, question_number: int) -> List[str]:
-        correct_str = ",".join(str(ans) for ans in question.correct_answers)
+        correct_answer = question.answer1
         
-        row = [
-            str(question_number),
-            question.question_text,
-            question.answer1,
-            question.answer2,
-            question.answer3,
-            question.answer4,
-            str(question.time_limit),
-            correct_str
-        ]
+        incorrect_answers = []
+        if question.answer2:
+            incorrect_answers.append(question.answer2)
+        if question.answer3:
+            incorrect_answers.append(question.answer3)
+        if question.answer4:
+            incorrect_answers.append(question.answer4)
         
-        row.extend([""] * (26 - len(row)))
+        row = [question.question_text, correct_answer]
+        
+        for i in range(3):
+            if i < len(incorrect_answers):
+                row.append(incorrect_answers[i])
+            else:
+                row.append("")
         
         return row
     
@@ -86,8 +88,8 @@ if __name__ == "__main__":
         correct_answers=[1]
     )
     
-    writer = BlooketWriter()
+    writer = GimkitWriter()
     writer.add_questions([q1, q2, q3])
     
-    writer.write("./data/blooket_output.csv")
-    print("Questions written to blooket_output.csv")
+    writer.write("./data/gimkit_output.csv")
+    print("Questions written to gimkit_output.csv")

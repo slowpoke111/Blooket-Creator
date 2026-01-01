@@ -40,7 +40,7 @@ Distractors:"""
                 messages=[
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.7,
+                temperature=0.4,
                 max_tokens=5000,
                 extra_body={"reasoning_effort": "none"}  
             )
@@ -74,8 +74,8 @@ Distractors:"""
 if __name__ == "__main__":
     generator: HackclubAPI = HackclubAPI()
     
-    question: str = "Who wrote The Master and Margarita?"
-    answer: str = "Mikhail Bulgakov"
+    question: str = "Who wrote Les Misérables?"
+    answer: str = "Victor Hugo"
     distractors: List[Optional[str]] = generator.generate_distractors(question, answer)
     
     if not distractors:
@@ -84,3 +84,4 @@ if __name__ == "__main__":
         print(f"Question: {question}")
         print(f"Correct Answer: {answer}")
         print(f"Distractors: {distractors}")
+

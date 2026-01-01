@@ -72,8 +72,8 @@ Distractors:"""
 if __name__ == "__main__":
     generator: OpenAIAPI = OpenAIAPI()
     
-    question: str = "Who wrote The Master and Margarita?"
-    answer: str = "Mikhail Bulgakov"
+    question: str = "Who wrote Les Misérables?"
+    answer: str = "Victor Hugo"
     distractors: List[Optional[str]] = generator.generate_distractors(question, answer)
     
     if not distractors:

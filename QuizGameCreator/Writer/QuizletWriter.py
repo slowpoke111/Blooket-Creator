@@ -6,7 +6,7 @@ from .Question import Question
 
 class QuizletWriter(Writer):
     skipAI = True
-    def __init__(self, template_path:str = "Blooket\\Writer\\Templates\\Quizlet.tsv") -> None:
+    def __init__(self, template_path:str = "QuizGameCreator/Writer/Templates/Quizlet.tsv") -> None:
         self.template_path = template_path
         self.questions: List[Question] = []
     

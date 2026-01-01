@@ -1,11 +1,12 @@
 from QuizGameCreator.SetCreator import SetCreator
 from QuizGameCreator.AI_Client.HackclubAPI import HackclubAPI
+from QuizGameCreator.Writer.GimkitWriter import GimkitWriter
 from QuizGameCreator.Writer.BlooketWriter import BlooketWriter
 import time
 from tqdm import tqdm
 
 API = HackclubAPI()
-WRITER = BlooketWriter()
+WRITER = GimkitWriter()
 CREATOR:SetCreator = SetCreator(output_file="./data/output.csv", time_limit=30, writer=WRITER, api_client=API)
 
 questionTime: int = 30
@@ -21,13 +22,14 @@ for line in tqdm(lines):
     if line == "": continue
     if not isAns:
         question=line
+        isAns = True
     else:
         answer = line
         CREATOR.add_question(question,answer)
         print(f"Q: {question}\nA: {answer}\nGenerating distractors...\n\n")
         answer = ""
         question = ""
-    isAns = not isAns
+        isAns = False
 CREATOR.write_to_file()
 
 if isAns and question:

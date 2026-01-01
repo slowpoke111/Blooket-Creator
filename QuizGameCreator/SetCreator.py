@@ -43,8 +43,11 @@ class SetCreator:
         )
         
         self.writer.add_question(q)
-        
-        time.sleep(60 / self.api_client.get_rate_limit())  #Rate limit
+
+        if not skipAI and not self.writer.skipAI:
+            rate_limit = self.api_client.get_rate_limit()
+            if rate_limit > 0:
+                time.sleep(60 / rate_limit)
     
     def write_to_file(self) -> None:
         self.writer.write(self.output_file)
