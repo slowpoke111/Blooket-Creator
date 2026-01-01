@@ -1,3 +1,5 @@
 openai
 python-dotenv
 tqdm
+anthropic
+# probaoy missing somethign 
