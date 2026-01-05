@@ -4,7 +4,7 @@ Quiz Game Creator Package
 
 from typing import TYPE_CHECKING
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 __author__ = "Ben Bell"
 
 __all__ = [
@@ -14,6 +14,8 @@ __all__ = [
     "AIClient",
     "HackclubAPI",
     "OpenAIAPI",
+    "QuizletWriter",
+    "QuestionBank",
 ]
 
 if TYPE_CHECKING:
@@ -44,4 +46,10 @@ def __getattr__(name):
     if name == "OpenAIAPI":
         from .AI_Client.OpenAIAPI import OpenAIAPI
         return OpenAIAPI
+    if name == "QuizletWriter":
+        from .Writer.QuizletWriter import QuizletWriter
+        return QuizletWriter
+    if name == "QuestionBank":
+        from .Writer.QuestionBank import QuestionBank
+        return QuestionBank
     raise AttributeError(f"module 'Blooket' has no attribute {name!r}")

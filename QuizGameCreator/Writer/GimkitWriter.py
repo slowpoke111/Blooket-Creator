@@ -6,6 +6,7 @@ from .Question import Question
 
 class GimkitWriter(Writer):
     skipAI = False
+    outputFormat = "csv"
     def __init__(self, template_path: str = "QuizGameCreator/Writer/Templates/Gimkit.csv"):
         self.template_path = template_path
         self.questions: List[Question] = []

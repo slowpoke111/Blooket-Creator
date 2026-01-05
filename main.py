@@ -2,12 +2,13 @@ from QuizGameCreator.SetCreator import SetCreator
 from QuizGameCreator.AI_Client.HackclubAPI import HackclubAPI
 from QuizGameCreator.Writer.GimkitWriter import GimkitWriter
 from QuizGameCreator.Writer.BlooketWriter import BlooketWriter
+from QuizGameCreator.Writer.KahootWriter import KahootWriter
 import time
 from tqdm import tqdm
 
 API = HackclubAPI()
-WRITER = GimkitWriter()
-CREATOR:SetCreator = SetCreator(output_file="./data/output.csv", time_limit=30, writer=WRITER, api_client=API)
+WRITER = KahootWriter()
+CREATOR:SetCreator = SetCreator(output_file="./data/output.xlsx", time_limit=30, writer=WRITER, api_client=API)
 
 questionTime: int = 30
 

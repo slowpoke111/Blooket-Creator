@@ -60,3 +60,9 @@ class SetCreator:
         self.bank.clear()
         self.writer.clear()
     
+    def load_questions_from_file(self, file_path: str) -> None:
+        self.bank.load_from_file(file_path)
+    
+    def __len__(self) -> int:
+        return self.bank.get_question_count()
+    

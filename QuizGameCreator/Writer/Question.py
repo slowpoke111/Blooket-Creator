@@ -38,3 +38,47 @@ class Question:
     
     def __str__(self) -> str:
         return f"Q: {self.question_text}\n1. {self.answer1}\n2. {self.answer2}\n3. {self.answer3}\n4. {self.answer4}\nTime Limit: {self.time_limit}s\nCorrect Answers: {self.correct_answers}"
+    
+    def __eq__(self, value: object) -> bool:
+        if not isinstance(value, Question):
+            return False
+        return (
+            self.question_text == value.question_text and
+            self.answers == value.answers and
+            self.time_limit == value.time_limit and
+            self.correct_answers == value.correct_answers and
+            self.difficulty == value.difficulty and
+            self.category == value.category and
+            self.tags == value.tags and
+            self.source == value.source and
+            self.explanation == value.explanation
+        )
+        
+    def to_dict(self) -> dict:
+        return {
+            "question_text": self.question_text,
+            "answers": self.answers,
+            "time_limit": self.time_limit,
+            "correct_answers": self.correct_answers,
+            "difficulty": self.difficulty,
+            "category": self.category,
+            "tags": self.tags,
+            "source": self.source,
+            "explanation": self.explanation
+        }
+    
+    def __hash__(self) -> int:
+        return hash((
+            self.question_text,
+            tuple(self.answers),
+            self.time_limit,
+            tuple(self.correct_answers),
+            self.difficulty,
+            self.category,
+            tuple(self.tags),
+            self.source,
+            self.explanation
+        ))
+    
+    def __bool__(self) -> bool:
+        return bool(self.question_text and self.answer1 and self.answer2 and self.correct_answers)

@@ -6,6 +6,7 @@ from .Question import Question
 
 class BlooketWriter(Writer):
     skipAI = False
+    outputFormat = "csv"
     def __init__(self, template_path: str = "QuizGameCreator/Writer/Templates/Blooket.csv"):
 
         self.template_path = template_path
