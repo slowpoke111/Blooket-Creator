@@ -1,5 +1,3 @@
-## Currently being refactored to support multiple AI Clients and output formats. Features may not work as expected and documentation is likely out of date
-
 
 ---
 # Blooket Creator
